@@ -1,0 +1,71 @@
+
+<project name="indy" basedir="." default="release">
+
+    <property file="local.properties"/>
+    <property file="build.properties"/>
+
+    <path id="classpath">
+        <fileset dir="${app.libext}" includes="*.jar"/>
+    </path>
+
+
+    <target name="clean">
+        <delete dir="${app.artifacts}"/>
+        <delete dir="${app.target}"/>
+        <delete dir="${app.dist}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${app.classes}"/>
+        <javac srcdir="."
+               destdir="${app.classes}"
+               debug="true"
+               verbose="true"
+               deprecation="true"
+               classpathref="classpath"
+                />
+    </target>
+
+
+    <target name="jar" depends="compile">
+        <delete file="${app.jar}"/>
+        <mkdir dir="${app.classes.images}"/>
+        <copy todir="${app.classes.images}">
+            <fileset dir="${app.images}" excludes="${app.credits}/**"/>
+        </copy>
+        <copy todir="${app.classes.credits}">
+            <fileset dir="${app.images.credits}"/>
+        </copy>
+        <copy todir="${app.classes.credits}">
+            <fileset dir="${app.sound}"/>
+        </copy>
+
+        <!--    Create jar file    -->
+        <mkdir dir="${app.artifacts}"/>
+
+        <jar jarfile="indy.jar" basedir="${app.artifacts}" manifest="${app.config}/MANIFEST.mf">
+            <fileset dir="${app.classes}" includes="*/**"/>
+            <fileset dir="${app.src}">                
+                <include name="i18n/**"/>
+            </fileset>
+        </jar>
+
+    </target>
+
+
+    <target name="release" depends="jar">
+        <mkdir dir="${app.dist}"/>
+        <copy file="${app.jar}" todir="${app.artifacts}"/>
+        <copy file="${app.jar}" todir="${app.dist}"/>
+        <delete file="${app.jar}"/>
+        <mkdir dir="${app.dist.lib}"/>
+
+        <!-- Copy all jar files from ${app.lib} to ${app.dist.lib} -->
+        <copy todir="${app.dist.lib}">
+            <fileset dir="${app.libext}" includes="*.*"/>
+        </copy>
+
+    </target>
+
+
+</project>

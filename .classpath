@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="artifacts/indy.jar"/>
+	<classpathentry kind="lib" path="dist/indy.jar"/>
+	<classpathentry kind="lib" path="dist/libext/looks-2.1.3.jar"/>
+	<classpathentry kind="lib" path="dist/libext/mp3plugin.jar"/>
+	<classpathentry kind="lib" path="dist/libext/swingx.jar"/>
+	<classpathentry kind="lib" path="libext/looks-2.1.3.jar"/>
+	<classpathentry kind="lib" path="libext/mp3plugin.jar"/>
+	<classpathentry kind="lib" path="libext/swingx.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
